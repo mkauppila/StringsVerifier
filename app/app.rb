@@ -1,8 +1,8 @@
 class App
-  def run
-    p 'hello world'
+  def run arguments
+  end
   end
 end
 
 app = App.new
-app.run
+app.run ARGV
