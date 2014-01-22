@@ -21,12 +21,42 @@ class Verifier
   end
 end
 
+class Source
+  def initialize(raw_contents)
+    @lines = raw_contents.split("\n")
+    @current_line = 0
+  end
+
+  def get_line
+    line = @lines[@current_line]
+    @current_line += 1
+    line
+  end
+end
+
 class StringsVerifier
   def run arguments
     if arguments.length != 1
       print_usage
       return
     end
+
+
+    line_counter = 1
+    raw_contents = File.read(arguments.first)
+    source = Source.new(raw_contents)
+    loop do
+      line = source.get_line
+      if line.nil?
+        break
+      end
+      print "#{line_counter} '#{line}'\n"
+
+      line_counter += 1
+    end
+
+    return 
+
 
     verifier = Verifier.new
 
@@ -35,7 +65,7 @@ class StringsVerifier
     File.open(filename) do |file|
       file.each do |line|
 
-      line.strip!
+        line.strip!
 
 =begin 
       if verifier.starts_comment(line)
