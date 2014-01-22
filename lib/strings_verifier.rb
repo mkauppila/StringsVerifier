@@ -1,12 +1,3 @@
-class Parser
-  def initialize(file)
-    @file = file 
-  end
-
-  def starts_comment?
-  end
-end
-
 class Verifier
   def starts_comment(line)
     line.start_with? "/*"
@@ -27,7 +18,6 @@ class Source
     @current_line = 0
   end
 
-  
   def get_line
     line = @lines[@current_line]
     @current_line += 1
@@ -35,7 +25,7 @@ class Source
   end
 
   private
-  
+
   def split_file_contents_to_lines(file_contents)
     file_contents.split("\n")
   end
@@ -86,7 +76,6 @@ class StringsVerifier
       end
 =end
         print "#{counter} #{line}"
-
 
         if verifier.is_localizable_string(line)
           print "is a local string\n"
