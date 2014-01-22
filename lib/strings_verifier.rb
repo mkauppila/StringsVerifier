@@ -69,6 +69,3 @@ class App
     print "usage: ./strings-verifier strings-file\n"
   end
 end
-
-app = App.new
-app.run ARGV
