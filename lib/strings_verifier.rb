@@ -21,7 +21,7 @@ class Verifier
   end
 end
 
-class App
+class StringsVerifier
   def run arguments
     if arguments.length != 1
       print_usage

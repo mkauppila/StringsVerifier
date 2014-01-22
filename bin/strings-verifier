@@ -2,5 +2,5 @@
 
 require 'strings_verifier'
 
-app = App.new
+app = StringsVerifier.new
 app.run ARGV
