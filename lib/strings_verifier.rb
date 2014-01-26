@@ -1,4 +1,5 @@
 require 'strings_verifier/source'
+require 'strings_verifier/version'
 
 class Verifier
   def starts_comment(line)
