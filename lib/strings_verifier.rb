@@ -1,3 +1,5 @@
+require 'strings_verifier/source'
+
 class Verifier
   def starts_comment(line)
     line.start_with? "/*"
@@ -12,24 +14,8 @@ class Verifier
   end
 end
 
-class Source
-  def initialize(raw_contents_of_file)
-    @lines = split_file_contents_to_lines(raw_contents_of_file)
-    @current_line = 0
-  end
 
-  def get_line
-    line = @lines[@current_line]
-    @current_line += 1
-    line
-  end
 
-  private
-
-  def split_file_contents_to_lines(file_contents)
-    file_contents.split("\n")
-  end
-end
 
 class StringsVerifier
   def run arguments
@@ -37,8 +23,7 @@ class StringsVerifier
       print_usage
       return
     end
-
-
+ 
     line_counter = 1
     raw_contents = File.read(arguments.first)
     source = Source.new(raw_contents)
@@ -54,6 +39,8 @@ class StringsVerifier
 
     return 
 
+
+    
 
     verifier = Verifier.new
 
