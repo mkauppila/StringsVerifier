@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Source do 
+describe StringsVerifier::Source do 
   before do
     contents = "first\nsecond\nthird\n"
-    @source = Source.new(contents)
+    @source = StringsVerifier::Source.new(contents)
   end
 
   it "should be created" do
-    @source.must_be_kind_of Source
+    @source.must_be_kind_of StringsVerifier::Source
   end
 
   it "should have three lines" do
