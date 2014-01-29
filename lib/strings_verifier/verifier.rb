@@ -1,14 +1,14 @@
 module StringsVerifier
   class Verifier
-    def starts_comment(line)
+    def starts_comment?(line)
       line.start_with? "/*"
     end
 
-    def is_localizable_string(line)
+    def is_localizable_string?(line)
       line.start_with? '"'
     end
 
-    def is_empty_line(line)
+    def is_empty_line?(line)
       line.length == 0
     end
 
