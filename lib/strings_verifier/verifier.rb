@@ -1,6 +1,7 @@
 module StringsVerifier
   class Verifier
     def starts_comment?(line)
+      line = remove_extra_whitespace(line)
       line.start_with? "/*"
     end
 

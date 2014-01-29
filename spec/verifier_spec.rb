@@ -18,4 +18,14 @@ describe StringsVerifier::Verifier do
       @verifier.is_empty_line?(" \n  ").must_be  :==, true
     end
   end
+
+  describe "should recognize a line that starts a comment" do
+    it "should recognize '/*' as comment " do
+      @verifier.starts_comment?("/*").must_be :==, true
+    end
+
+    it "should recognize ' /* ' as comment " do
+      @verifier.starts_comment?(" /* ").must_be :==, true
+    end
+  end
 end
