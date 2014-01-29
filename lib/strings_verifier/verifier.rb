@@ -6,6 +6,7 @@ module StringsVerifier
     end
 
     def is_localizable_string?(line)
+      line = remove_extra_whitespace(line)
       line.start_with? '"'
     end
 

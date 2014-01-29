@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StringsVerifier::Verifier do 
+describe "Verifier should recognize different types of data" do 
   before do
     @verifier = StringsVerifier::Verifier.new
   end
@@ -26,6 +26,16 @@ describe StringsVerifier::Verifier do
 
     it "should recognize ' /* ' as comment " do
       @verifier.starts_comment?(" /* ").must_be :==, true
+    end
+  end
+
+  describe "should recognize a line containing localizable string" do
+    it "should recognize '\"' "  do 
+      @verifier.is_localizable_string?('"').must_be :==, true
+    end
+
+    it "should recognize ' \" ' "  do 
+      @verifier.is_localizable_string?(' " ').must_be :==, true
     end
   end
 end
