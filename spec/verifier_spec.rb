@@ -5,15 +5,17 @@ describe StringsVerifier::Verifier do
     @verifier = StringsVerifier::Verifier.new
   end
 
-  it "should recognize '' as empty line" do 
-    @verifier.is_empty_line?('').must_be  :==, true
-  end
+  describe "should recognize an empty line" do
+    it "should recognize '' as empty line" do 
+      @verifier.is_empty_line?('').must_be  :==, true
+    end
 
-  it "should recognize '  ' as empty line" do 
-    @verifier.is_empty_line?('  ').must_be  :==, true
-  end
+    it "should recognize '  ' as empty line" do 
+      @verifier.is_empty_line?('  ').must_be  :==, true
+    end
 
-  it "should recognize ' \n  ' as empty line" do 
-    @verifier.is_empty_line?(" \n  ").must_be  :==, true
+    it "should recognize ' \n  ' as empty line" do 
+      @verifier.is_empty_line?(" \n  ").must_be  :==, true
+    end
   end
 end
