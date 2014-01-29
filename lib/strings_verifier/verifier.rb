@@ -9,12 +9,19 @@ module StringsVerifier
     end
 
     def is_empty_line?(line)
-      line.length == 0
+      line = remove_extra_whitespace(line)
+      line.empty?
     end
 
     def process(source)
       # run through the source, 
       # collect errors to list and return it
+    end
+
+    private 
+
+    def remove_extra_whitespace(line)
+      line.strip
     end
   end
 end
