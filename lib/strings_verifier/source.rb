@@ -5,7 +5,7 @@ module StringsVerifier
       @current_line = 0
     end
 
-    def get_line
+    def get_current_line
       @lines[@current_line]
     end
 

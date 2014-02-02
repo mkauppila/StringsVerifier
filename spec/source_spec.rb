@@ -15,12 +15,12 @@ describe StringsVerifier::Source do
   end
 
   it "should return the current line" do
-    @source.get_line.must_match /first/
+    @source.get_current_line.must_match /first/
   end
 
   it "should be able to advance the line" do
-    @source.get_line.must_match /first/
+    @source.get_current_line.must_match /first/
     @source.advance_to_next_line
-    @source.get_line.must_match /second/
+    @source.get_current_line.must_match /second/
   end
 end
