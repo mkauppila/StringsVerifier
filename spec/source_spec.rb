@@ -14,9 +14,13 @@ describe StringsVerifier::Source do
     @source.number_of_lines.must_equal 3
   end
 
-  it "it should advance lines" do
+  it "should return the current line" do
     @source.get_line.must_match /first/
+  end
+
+  it "should be able to advance the line" do
+    @source.get_line.must_match /first/
+    @source.advance_to_next_line
     @source.get_line.must_match /second/
-    @source.get_line.must_match /third/
   end
 end
