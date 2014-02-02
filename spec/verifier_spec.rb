@@ -1,13 +1,30 @@
 require 'spec_helper'
 
-describe "Verifier should verify correctness"
-  before do
-    @verifier = StringsVerifier::Verifier.new
+describe "Verifier should verify different elements" do
+  let(:verifier) { StringsVerifier::Verifier.new }
+
+  it "should properly verify a correct one line comment" do
+    str = "/* this is a comment */"
+    source = StringsVerifier::Source.new(str)
+
+    errors = verifier.verify_comment(source)
+    errors.must_be_empty
   end
 
-  it "should verify that given comment is correct"
-    str = "/* this is a comment */"
-    @verifier.verify_comment(str, source)
+  it "should properly verify correct multiline correct" do
+    str = "/* this \nis a\ncomment\n"
+    source = StringsVerifier::Source.new(str)
+
+    errors = verifier.verify_comment(source)
+    errors.must_be_empty
+  end
+
+  it "should detect incorrect single line comment" do
+    str = "/ this is a broken comment"
+    source = StringsVerifier::Source.new(str)
+
+    errors = verifier.verify_comment(source)
+    errors.wont_be_empty
   end
 end
 
