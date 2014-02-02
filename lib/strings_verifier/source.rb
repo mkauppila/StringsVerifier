@@ -6,9 +6,11 @@ module StringsVerifier
     end
 
     def get_line
-      line = @lines[@current_line]
+      @lines[@current_line]
+    end
+
+    def advance_to_next_line
       @current_line += 1
-      line
     end
 
     def number_of_lines
