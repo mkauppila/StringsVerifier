@@ -2,5 +2,8 @@
 
 require 'strings_verifier'
 
-app = StringsVerifierA.new
-app.run ARGV
+# create source
+# create and use the verifier
+# output the found errors
+
+print "To be implemented...\n"
