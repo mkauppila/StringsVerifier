@@ -2,8 +2,8 @@ $:.push File.expand_path("../lib", __FILE__)
 require "strings_verifier/version"
 
 Gem::Specification.new do |s|
-  s.name = 'Strings Verifier'
-  s.version = '0.0.1-pre'
+  s.name = 'strings-verifier'
+  s.version = '0.0.1'
   s.date = '2014-01-22'
   s.summary = '.strings verifier'
   s.description = "Verifies Apple's .strings translation files"
