@@ -90,7 +90,7 @@ module StringsVerifier
     end
 
     def parse_whitespace 
-      while is_whitespace? @ch
+      while is_whitespace? @source_enumerator.peek
         advance_to_next_character
       end
     end
