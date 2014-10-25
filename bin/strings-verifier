@@ -2,8 +2,7 @@
 
 require 'strings_verifier'
 
-# create source
-# create and use the verifier
-# output the found errors
+verifier = StringsVerifier::Verifier.new
+source = " /* tervehdys */ \"hello\"=\"terve\";"
+verifier.process(source)
 
-print "To be implemented...\n"
