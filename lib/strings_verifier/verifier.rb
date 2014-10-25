@@ -9,32 +9,18 @@ module StringsVerifier
       @source_enumerator = @source.each_char
       @ch = ''
 
-      advance_to_next_character
-
       begin
         while true 
+          advance_to_next_character
 
-          #puts "- #{@ch}"
           if is_whitespace? @ch
             parse_whitespace
-            #puts "starts with whitespace"
-
-            # This is a bit sloppy but prevents
-            # hopping over a character after whitespace
-            next
           elsif @ch == "/"
-            puts "starts with / comment starting"
             parse_comment
-
-            # This is a bit sloppy but prevents
-            # hopping over a character after whitespace
-            next
           elsif @ch == "\""
-            puts "starts with \" string starting"
             parse_translation_string
           end
 
-          advance_to_next_character
         end
       rescue StopIteration
         puts "End of File"
@@ -48,6 +34,7 @@ module StringsVerifier
       comment_contents = ""
 
       advance_to_next_character
+      puts @ch
       if @ch == "*"
         advance_to_next_character
 
@@ -59,7 +46,7 @@ module StringsVerifier
           advance_to_next_character
         end
       else
-        puts "Was expecting * for a comment start"
+        puts "Was expecting * for a comment start, got #{@ch}"
       end
 
       puts "[D] parsed comment '#{comment_contents}'"
