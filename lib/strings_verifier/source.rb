@@ -1,26 +1,33 @@
 module StringsVerifier
+
   class Source
-    def initialize(raw_contents_of_file)
-      @lines = split_file_contents_to_lines(raw_contents_of_file)
-      @current_line = 0
+    
+    def initialize(source_text)
+      @enumerator = source_text.each_char
+      # Move on the first character by default
+      self.next
     end
 
-    def get_current_line
-      @lines[@current_line]
+    def current_character
+      @ch
     end
 
-    def advance_to_next_line
-      @current_line += 1
+    def next 
+      begin
+        @ch = @enumerator.next
+      rescue StopIteration
+        @ch = nil
+      end
     end
 
-    def number_of_lines
-      @lines.size
+    def peek 
+      begin
+        @enumerator.peek
+      rescue StopIteration
+        nil
+      end
     end
 
-    private
-
-    def split_file_contents_to_lines(file_contents)
-      file_contents.split("\n")
-    end
   end
+
 end
