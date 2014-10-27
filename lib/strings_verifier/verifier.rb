@@ -1,35 +1,32 @@
 module StringsVerifier
+
   class Verifier
 
     def process(source)
       @source = source
+
       @line_count = 0
       @column_count = 0
 
-      @source_enumerator = @source.each_char
       @ch = ''
 
-      begin
-        while true 
-          peeked = @source_enumerator.peek
-
-          if is_whitespace? peeked
-            parse_whitespace
-          elsif peeked == "/"
-            parse_comment
-          elsif peeked == "\""
-            parse_translation_string
-          else
-            puts "Error"
-          end
-
+      while peeked = @source.peek
+        if is_whitespace? peeked
+          parse_whitespace
+        elsif peeked == "/"
+          parse_comment
+        elsif peeked == "\""
+          parse_translation_string
+        else
+          puts "Error"
+          exit89 # Quick exit through non-bound local variable
         end
-      rescue StopIteration
-        puts "End of File"
-      ensure
-        puts "-All analyzed"
-        puts "-line count: #{@line_count}"
+
+        peeked = @source.peek
       end
+
+      puts "-All analyzed"
+      puts "-line count: #{@line_count}"
     end
 
     def parse_comment
@@ -45,7 +42,7 @@ module StringsVerifier
         # loop as long as @ch is :alnum:
         comment_contents << @ch
 
-        while @ch != "*" and @source_enumerator.peek != "/"
+        while @ch != "*" and @source.peek != "/"
           comment_contents << @ch
           advance_to_next_character
         end
@@ -101,13 +98,13 @@ module StringsVerifier
 
     def parse_whitespace 
       # Remvoe peek, and use next here?
-      while is_whitespace? @source_enumerator.peek
+      while is_whitespace? @source.peek
         advance_to_next_character
       end
     end
 
     def advance_to_next_character
-      @ch = @source_enumerator.next
+      @ch = @source.next
       #puts "advanced to #{@ch}"
     end
 
@@ -140,5 +137,7 @@ module StringsVerifier
     def remove_extra_whitespace(line)
       line.strip
     end
+
   end
+
 end

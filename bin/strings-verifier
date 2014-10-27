@@ -2,7 +2,11 @@
 
 require 'strings_verifier'
 
+sourceText = "       /* tervehdys */ \"hello\"=\"terve\";"
+#sourceText =" /* hello */"
+#sourceText = "\"eat\"=\"syo\""
+source = StringsVerifier::Source.new sourceText
+
 verifier = StringsVerifier::Verifier.new
-source = " /* tervehdys */ \"hello\"=\"terve\";"
 verifier.process(source)
 
