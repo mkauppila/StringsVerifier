@@ -1,26 +1,37 @@
 require 'spec_helper'
 
 describe StringsVerifier::Source do 
-  let(:source) do
-    contents = "first\nsecond\nthird\n"
-    StringsVerifier::Source.new(contents)
+
+  it "should be able get the current character" do 
+    source =  StringsVerifier::Source.new("hello")
+    source.current_character.must_equal "h"
   end
 
-  it "should be created" do
-    source.must_be_kind_of StringsVerifier::Source
+  it "should be able to advance to next character" do 
+    source =  StringsVerifier::Source.new("hello")
+    source.current_character.must_equal "h"
+    source.next
+    source.current_character.must_equal "e"
   end
 
-  it "should have three lines" do
-    source.number_of_lines.must_equal 3
+  it "should be able to peek at next character without moving to it" do 
+    source =  StringsVerifier::Source.new("hello")
+    source.current_character.must_equal "h"
+    source.peek.must_equal "e"
+    source.current_character.must_equal "h"
   end
 
-  it "should return the current line" do
-    source.get_current_line.must_match /first/
+  it "should return nil on end of file " do 
+    source =  StringsVerifier::Source.new("h")
+    source.current_character.must_equal "h"
+    source.next
+    source.current_character.must_equal nil
   end
 
-  it "should be able to advance the line" do
-    source.get_current_line.must_match /first/
-    source.advance_to_next_line
-    source.get_current_line.must_match /second/
+  it "should return nil when peeking over the end of file" do
+    source =  StringsVerifier::Source.new("h")
+    source.current_character.must_equal "h"
+    source.peek.must_equal nil
   end
+
 end
