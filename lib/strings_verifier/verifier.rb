@@ -11,14 +11,16 @@ module StringsVerifier
 
       begin
         while true 
-          advance_to_next_character
+          peeked = @source_enumerator.peek
 
-          if is_whitespace? @ch
+          if is_whitespace? peeked
             parse_whitespace
-          elsif @ch == "/"
+          elsif peeked == "/"
             parse_comment
-          elsif @ch == "\""
+          elsif peeked == "\""
             parse_translation_string
+          else
+            puts "Error"
           end
 
         end
@@ -33,7 +35,9 @@ module StringsVerifier
     def parse_comment
       comment_contents = ""
 
-      advance_to_next_character
+      advance_to_next_character # eatCharacter /
+
+      advance_to_next_character # eatCharacter *
       puts @ch
       if @ch == "*"
         advance_to_next_character
@@ -60,16 +64,20 @@ module StringsVerifier
         key = ""
         value = ""
 
+        puts "- " + @ch
+        advance_to_next_character
+        puts "- " + @ch
         advance_to_next_character
 
         while @ch != "\""
           key << @ch
+          # Validate the character againt a setl
           advance_to_next_character
         end
 
         advance_to_next_character
 
-        #parse whitespace
+        #parse whitespace (no cr/lf)
 
         if @ch != "="
           puts "Expected =, got #{@ch}"
@@ -77,7 +85,7 @@ module StringsVerifier
           puts "ok"
         end
         
-        #parse_whitespace
+        #parse_whitespace (no cr/lf)
         advance_to_next_character
         advance_to_next_character
 
@@ -86,10 +94,13 @@ module StringsVerifier
           advance_to_next_character
         end
 
+        advance_to_next_character
+
         puts "[D] parsing translation string: #{key} - #{value}"
     end
 
     def parse_whitespace 
+      # Remvoe peek, and use next here?
       while is_whitespace? @source_enumerator.peek
         advance_to_next_character
       end
